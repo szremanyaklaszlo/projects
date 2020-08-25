@@ -8,7 +8,7 @@ public class OutcomeOdd {
     private LocalDateTime validFrom;
     private LocalDateTime validUntil;
     private BigDecimal value;
-    
+
     public OutcomeOdd(LocalDateTime validFrom, LocalDateTime validUntil, BigDecimal value) {
         super();
         this.validFrom = validFrom;
@@ -39,5 +39,5 @@ public class OutcomeOdd {
     public void setValue(BigDecimal value) {
         this.value = value;
     }
-    
+
 }

@@ -3,11 +3,11 @@ package com.training.jsonparser.domain;
 import java.util.List;
 
 public class Bet {
-    
+
     private String description;
     private BetType betType;
     private List<Outcome> outcomes;
-    
+
     public Bet(String description, BetType betType, List<Outcome> outcomes) {
         super();
         this.description = description;

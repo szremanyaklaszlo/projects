@@ -6,7 +6,7 @@ public class Outcome {
 
     private String description;
     private List<OutcomeOdd> outcomeOdds;
-    
+
     public Outcome(String description, List<OutcomeOdd> outcomeOdds) {
         super();
         this.description = description;
@@ -28,6 +28,5 @@ public class Outcome {
     public void setOutcomeOdds(List<OutcomeOdd> outcomeOdds) {
         this.outcomeOdds = outcomeOdds;
     }
-    
-    
+
 }
