@@ -9,7 +9,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
@@ -17,54 +16,48 @@ import org.springframework.security.core.GrantedAuthority;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true, nullable = false)
+    private String username;
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
-    @ColumnDefault(value = "true")
-    private boolean active;
+    @Column(nullable = false)
     private GrantedAuthority authority;
 
     public User() {
+    }
+
+    public User(String username, String email, String password, GrantedAuthority authority) {
+        super();
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.authority = authority;
     }
 
     public long getId() {
         return id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
     public GrantedAuthority getAuthority() {
         return authority;
-    }
-
-    public void setAuthority(GrantedAuthority authority) {
-        this.authority = authority;
     }
 
 }

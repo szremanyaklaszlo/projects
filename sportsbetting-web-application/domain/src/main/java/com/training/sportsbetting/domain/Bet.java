@@ -16,20 +16,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "bet")
 public class Bet {
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+    @JsonIgnore
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Enumerated(EnumType.STRING)
     @Column(name = "bet_type", nullable = false)
     private BetType betType;
     private String description;
+    @JsonBackReference
     @ManyToOne(optional = false)
     @JoinColumn(name = "sport_event_id", nullable = false)
     private SportEvent sportEvent;
+    @JsonManagedReference
     @OneToMany(mappedBy = "bet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Outcome> outcomes;
 

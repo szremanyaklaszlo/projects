@@ -17,23 +17,26 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 
-import com.training.sportsbetting.converter.LocalDateTimeAttributeConverter;
+import com.training.sportsbetting.domain.converter.LocalDateTimeAttributeConverter;
 
 @Entity
 @Table(name = "wager")
 public class Wager {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false)
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
-    private LocalDateTime timestamp;
-    @Column(nullable = false)
     private BigDecimal amount;
+    @Column(name = "valid_from", nullable = false)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
+    private LocalDateTime validFrom;
+    @Column(name = "valid_until")
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
+    private LocalDateTime validUntil;
     @ManyToOne(optional = false)
-    @JoinColumn(name = "outcome_odd_id", nullable = false)
-    private OutcomeOdd outcomeOdd;
+    @JoinColumn(name = "outcome_id", nullable = false)
+    private Outcome outcome;
     @ManyToOne(optional = false)
     @JoinColumn(name = "player_id", nullable = false)
     private Player player;
@@ -48,60 +51,42 @@ public class Wager {
     public Wager() {
     }
 
-    public Wager(BigDecimal amount, OutcomeOdd outcomeOdd, Player player) {
-        timestamp = LocalDateTime.now();
+    public Wager(BigDecimal amount, LocalDateTime validFrom, LocalDateTime validUntil, Outcome outcome, Player player, Currency currency) {
+        super();
         this.amount = amount;
-        this.outcomeOdd = outcomeOdd;
+        this.validFrom = validFrom;
+        this.validUntil = validUntil;
+        this.outcome = outcome;
         this.player = player;
-        currency = player.getCurrency();
+        this.currency = currency;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public LocalDateTime getValidFrom() {
+        return validFrom;
     }
 
-    public OutcomeOdd getOutcomeOdd() {
-        return outcomeOdd;
+    public LocalDateTime getValidUntil() {
+        return validUntil;
     }
 
-    public void setOutcomeOdd(OutcomeOdd outcomeOdd) {
-        this.outcomeOdd = outcomeOdd;
+    public Outcome getOutcome() {
+        return outcome;
     }
 
     public Player getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     public Currency getCurrency() {
         return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
     }
 
     public boolean isProcessed() {

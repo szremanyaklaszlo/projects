@@ -1,39 +1,42 @@
 package com.training.sportsbetting.domain;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "outcome")
 public class Outcome {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String description;
+    @Column(nullable = false)
+    private BigDecimal value;
+    @JsonBackReference
     @ManyToOne(optional = false)
     @JoinColumn(name = "bet_id", nullable = false)
     private Bet bet;
-    @Column(name = "outcome_odds")
-    @OneToMany(mappedBy = "outcome", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<OutcomeOdd> outcomeOdds;
 
     public Outcome() {
     }
 
-    public Outcome(String description, Bet bet) {
+    public Outcome(String description, BigDecimal value, Bet bet) {
+        super();
         this.description = description;
+        this.value = value;
         this.bet = bet;
     }
 
@@ -45,12 +48,12 @@ public class Outcome {
         return description;
     }
 
-    public Bet getBet() {
-        return bet;
+    public BigDecimal getValue() {
+        return value;
     }
 
-    public List<OutcomeOdd> getOutcomeOdds() {
-        return outcomeOdds;
+    public Bet getBet() {
+        return bet;
     }
 
 }

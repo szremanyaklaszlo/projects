@@ -10,15 +10,15 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath />
 	</parent>
-	<groupId>com.training</groupId>
-	<artifactId>sportsbetting</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<groupId>com.training.sportsbetting</groupId>
+	<artifactId>sportsbetting-web-application</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>sportsbetting-application-domain</module>
-		<module>sportsbetting-application-service</module>
-		<module>sportsbetting-application-web</module>
+		<module>domain</module>
+		<module>service</module>
+		<module>view</module>
 	</modules>
 
 	<properties>
@@ -26,6 +26,7 @@
 		<maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.checkstyle.version>3.1.0</maven.checkstyle.version>
+		<module-version>0.0.1-SNAPSHOT</module-version>
 	</properties>
 
 	<distributionManagement>
@@ -53,7 +54,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -83,6 +87,26 @@
 		</dependency>
 
 	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.training.sportsbetting</groupId>
+				<artifactId>domain</artifactId>
+				<version>${module-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.training.sportsbetting</groupId>
+				<artifactId>service</artifactId>
+				<version>${module-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.training.sportsbetting</groupId>
+				<artifactId>view</artifactId>
+				<version>${module-version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<profiles>
 		<profile>
@@ -126,22 +150,4 @@
 		</profile>
 	</profiles>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>${maven.checkstyle.version}</version>
-				<configuration>
-					<configLocation>../settings/checkstyle_rules.xml</configLocation>
-					<propertiesLocation>../settings/checkstyle_maven.properties</propertiesLocation>
-					<consoleOutput>true</consoleOutput>
-					<failsOnError>true</failsOnError>
-					<failOnViolation>true</failOnViolation>
-					<violationSeverity>warning</violationSeverity>
-					<linkXRef>false</linkXRef>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

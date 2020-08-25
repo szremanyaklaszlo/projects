@@ -16,30 +16,40 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.training.sportsbetting.converter.LocalDateTimeAttributeConverter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.training.sportsbetting.domain.converter.LocalDateTimeAttributeConverter;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "sport_event")
 public class SportEvent {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false)
     private String title;
     @Column(name = "start_time", nullable = false)
     @Convert(converter = LocalDateTimeAttributeConverter.class)
     private LocalDateTime startTime;
+    @Column(name = "end_time", nullable = false)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
+    private LocalDateTime endTime;
+    @JsonManagedReference
     @OneToMany(mappedBy = "sportEvent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Bet> bets;
 
     public SportEvent() {
     }
 
-    public SportEvent(String title, LocalDateTime startDate) {
+    public SportEvent(String title, LocalDateTime startTime, LocalDateTime endTime, List<Bet> bets) {
+        super();
         this.title = title;
-        this.startTime = startDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.bets = bets;
     }
 
     public long getId() {
@@ -50,8 +60,12 @@ public class SportEvent {
         return title;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDateTime getStartTime() {
         return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
     public List<Bet> getBets() {
