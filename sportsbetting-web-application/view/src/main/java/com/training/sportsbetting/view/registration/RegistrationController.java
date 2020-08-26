@@ -1,4 +1,4 @@
-package com.training.sportsbetting.view.registration.controller;
+package com.training.sportsbetting.view.registration;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.training.sportsbetting.domain.Currency;
 import com.training.sportsbetting.domain.Player;
-import com.training.sportsbetting.service.PlayerService;
-import com.training.sportsbetting.view.registration.model.PlayerModel;
+import com.training.sportsbetting.service.user.PlayerService;
 
 @Controller
 public class RegistrationController {
@@ -23,7 +22,7 @@ public class RegistrationController {
     @Autowired
     private PlayerService playerService;
     @Autowired
-    private PasswordEncoder pswEncoder;
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/registration")
     public String getRegistration(Model model) {
@@ -33,7 +32,9 @@ public class RegistrationController {
 
     @PostMapping("save_player")
     public String savePlayer(@ModelAttribute("player") PlayerModel player) {
-        System.out.println(player.getFirstName());
+        playerService.savePlayer(new Player(player.getUsername(), player.getEmail(), passwordEncoder.encode(player.getPassword()),
+                new SimpleGrantedAuthority("ROLE_USER"), player.getFirstName(), player.getLastName(), BigDecimal.valueOf(1000), Currency.USD,
+                LocalDate.parse(player.getBirth())));
         return "redirect:login";
     }
 

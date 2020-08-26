@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.sportsbetting.domain.FootballSportEvent;
 import com.training.sportsbetting.domain.SportEvent;
-import com.training.sportsbetting.service.SportEventService;
+import com.training.sportsbetting.service.event.SportEventService;
 
 @RestController
 @RequestMapping("/api/sportevent")

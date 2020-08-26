@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class ServiceMethodAspects {
+public class ServiceMethodAspect {
 
-    private final static Logger LOG = LoggerFactory.getLogger(ServiceMethodAspects.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ServiceMethodAspect.class);
     private long startTime;
     private long endTime;
 

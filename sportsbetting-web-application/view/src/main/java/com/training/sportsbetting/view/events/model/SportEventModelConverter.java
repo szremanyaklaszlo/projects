@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.training.sportsbetting.domain.Outcome;
 import com.training.sportsbetting.domain.SportEvent;
-import com.training.sportsbetting.service.SportEventService;
+import com.training.sportsbetting.service.event.SportEventService;
 
 @Service
 public class SportEventModelConverter {

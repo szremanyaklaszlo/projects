@@ -9,7 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.training.sportsbetting.domain.User;
-import com.training.sportsbetting.service.dao.UserRepository;
+import com.training.sportsbetting.service.user.UserNotFoundException;
+import com.training.sportsbetting.service.user.repository.UserRepository;
 
 @Service
 public class DefaultUserDetailsService implements UserDetailsService {

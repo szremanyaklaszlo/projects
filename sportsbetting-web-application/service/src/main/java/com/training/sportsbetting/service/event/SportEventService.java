@@ -1,4 +1,4 @@
-package com.training.sportsbetting.service;
+package com.training.sportsbetting.service.event;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,7 +10,7 @@ import com.training.sportsbetting.domain.Bet;
 import com.training.sportsbetting.domain.FootballSportEvent;
 import com.training.sportsbetting.domain.Outcome;
 import com.training.sportsbetting.domain.SportEvent;
-import com.training.sportsbetting.service.dao.SportEventRepository;
+import com.training.sportsbetting.service.event.repository.SportEventRepository;
 
 @Service
 public class SportEventService {
@@ -31,4 +31,5 @@ public class SportEventService {
                 .map(Bet::getOutcomes).flatMap(List::stream)
                 .collect(Collectors.toList());
     }
+    
 }

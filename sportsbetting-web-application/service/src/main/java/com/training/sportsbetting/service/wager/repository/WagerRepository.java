@@ -1,4 +1,4 @@
-package com.training.sportsbetting.service.dao;
+package com.training.sportsbetting.service.wager.repository;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.training.sportsbetting.service.dao;
+package com.training.sportsbetting.service.user.repository;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package com.training.sportsbetting.service.security;
+package com.training.sportsbetting.service.user;
 
 public class UserNotFoundException extends RuntimeException {
 

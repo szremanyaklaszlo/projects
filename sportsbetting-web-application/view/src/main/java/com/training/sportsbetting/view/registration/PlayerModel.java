@@ -1,4 +1,4 @@
-package com.training.sportsbetting.view.registration.model;
+package com.training.sportsbetting.view.registration;
 
 public class PlayerModel {
 
