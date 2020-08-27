@@ -10,7 +10,7 @@ import com.training.sportsbetting.domain.config.DomainConfig;
 
 @Configuration
 @EnableAspectJAutoProxy
-@EnableJpaRepositories("com.training.sportsbetting.service.dao")
+@EnableJpaRepositories("com.training.sportsbetting.service")
 @ComponentScan(basePackages = "com.training.sportsbetting.service")
 @Import(value = DomainConfig.class)
 public class ServiceConfig {
