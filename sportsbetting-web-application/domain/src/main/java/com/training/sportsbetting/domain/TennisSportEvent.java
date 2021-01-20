@@ -14,9 +14,8 @@ public class TennisSportEvent extends SportEvent {
         super();
     }
 
-    public TennisSportEvent(String title, LocalDateTime startTime, LocalDateTime endTime, List<Bet> bets) {
-        super(title, startTime, endTime, bets);
-        // TODO Auto-generated constructor stub
+    public TennisSportEvent(String title, String homeTeam, String awayTeam, LocalDateTime startTime, LocalDateTime endTime, List<Bet> bets) {
+        super(title, homeTeam, awayTeam, startTime, endTime, bets);
     }
 
 }

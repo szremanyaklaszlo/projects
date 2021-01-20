@@ -16,8 +16,9 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.training.sportsbetting.domain.converter.LocalDateTimeAttributeConverter;
 
 @Entity
@@ -25,12 +26,16 @@ import com.training.sportsbetting.domain.converter.LocalDateTimeAttributeConvert
 @Table(name = "sport_event")
 public class SportEvent {
 
-    @JsonIgnore
+    @JsonProperty(access = Access.READ_ONLY)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false)
     private String title;
+    @Column(name = "home_team")
+    private String homeTeam;
+    @Column(name = "away_team")
+    private String awayTeam;
     @Column(name = "start_time", nullable = false)
     @Convert(converter = LocalDateTimeAttributeConverter.class)
     private LocalDateTime startTime;
@@ -44,9 +49,11 @@ public class SportEvent {
     public SportEvent() {
     }
 
-    public SportEvent(String title, LocalDateTime startTime, LocalDateTime endTime, List<Bet> bets) {
+    public SportEvent(String title, String homeTeam, String awayTeam, LocalDateTime startTime, LocalDateTime endTime, List<Bet> bets) {
         super();
         this.title = title;
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
         this.startTime = startTime;
         this.endTime = endTime;
         this.bets = bets;
@@ -58,6 +65,14 @@ public class SportEvent {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getHomeTeam() {
+        return homeTeam;
+    }
+
+    public String getAwayTeam() {
+        return awayTeam;
     }
 
     public LocalDateTime getStartTime() {

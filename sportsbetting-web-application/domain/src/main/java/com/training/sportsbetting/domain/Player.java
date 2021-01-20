@@ -18,6 +18,7 @@ import com.training.sportsbetting.domain.converter.LocalDateAttributeConverter;
 @Entity
 @Table(name = "player")
 public class Player extends User {
+    
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")

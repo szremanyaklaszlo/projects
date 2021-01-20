@@ -19,6 +19,7 @@
 		<module>domain</module>
 		<module>service</module>
 		<module>view</module>
+		<module>api</module>
 	</modules>
 
 	<properties>
@@ -60,6 +61,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 		</dependency>
@@ -87,7 +93,7 @@
 		</dependency>
 
 	</dependencies>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -103,6 +109,11 @@
 			<dependency>
 				<groupId>com.training.sportsbetting</groupId>
 				<artifactId>view</artifactId>
+				<version>${module-version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.training.sportsbetting</groupId>
+				<artifactId>api</artifactId>
 				<version>${module-version}</version>
 			</dependency>
 		</dependencies>

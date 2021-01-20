@@ -20,19 +20,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-        .antMatchers("/", "/home", "/registration", "/css/**","/js/**").permitAll()
-        .antMatchers("/events").hasAnyRole("ADMIN", "USER")
-        .antMatchers("/profile").hasRole("ADMIN")
-        .and()
-        .formLogin().loginPage("/login").defaultSuccessUrl("/events")
-        .and()
-        .logout()
-        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-        .logoutSuccessUrl("/login?logout")
-        .deleteCookies("JSESSIONID")
-        .invalidateHttpSession(true)
-        .clearAuthentication(true)
-        .permitAll();
+                .antMatchers("/", "/home", "/events", "/registration", "/css/**", "/js/**").permitAll()
+                .antMatchers("/profile", "/bet").hasRole("USER")
+                .and()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/home")
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .permitAll();
     }
 
     @Override

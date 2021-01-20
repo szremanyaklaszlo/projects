@@ -1,0 +1,89 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>SportsBet</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark static-top">
+        <span class="navbar-brand">
+            <span> Hi </span>
+            <span th:text="${player.username}"></span>
+            <span>, Your Balance: </span>
+            <span th:text="${player.balance != null} ? ${player.balance} : '0' "></span>
+            <span th:text="${player.currency}"></span>
+            <span th:if="${player.balance == null or player.balance <= rechargeBoundary}">
+                <form th:action="@{recharge}" method="post">
+                    <button type="submit" class="btn btn-primary">Recharge</button>
+                </form>
+            </span>
+        </span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item pr-4"><a class="nav-link" href="/home">Home</a></li>
+                <li class="nav-item pr-4"><a class="nav-link" href="/events">Events</a></li>
+                <li class="nav-item active pr-4"><a class="nav-link" href="/profile">Profile</a></li>
+                <li class="nav-item pr-4 dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">English</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Magyar</a>
+                    </div></li>
+                <li class="nav-item pr-4"><a class="nav-link active button-decoration" href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="d-flex justify-content-center mt-sm-2 mt-md-4 mt-lg-5">
+        <div class="col-sm-6 m-sm-1 col-md-5 m-md-2 col-lg-4 m-lg-3 bg-primary">
+            <h4>Profile</h4>
+            <p>
+                <span>Name: </span>
+                <span th:text="${player.firstName} + ' ' + ${player.lastName}"></span>
+            </p>
+            <p>
+                <span>Username: </span>
+                <span th:text="${player.username}"></span>
+            </p>
+            <p>
+                <span>Email: </span>
+                <span th:text="${player.email}"></span>
+            </p>
+            <p>
+                <span>Birth date: </span>
+                <span th:text="${player.birth}"></span>
+            </p>
+        </div>
+        <div class="col-sm-3 m-sm-1 col-md-3 m-md-2 col-lg-2 m-lg-3 bg-success">
+            <h4>Balance</h4>
+            <p>
+                <span>Active: </span>
+                <span class="float-right"
+                    th:text="${player.balance != null} ? ${player.balance} + ' ' + ${player.currency} : '0' + ' ' + ${player.currency}"></span>
+            </p>
+            <p>
+                <span>In game: </span>
+                <span class="float-right"
+                    th:text="${player.balance != null} ? ${player.balance} + ' ' + ${player.currency} : '0' + ' ' + ${player.currency}"></span>
+            </p>
+            <div class="dropdown-divider"></div>
+            <p>
+                <span>Total: </span>
+                <span class="float-right"
+                    th:text="${player.balance != null} ? ${player.balance} + ' ' + ${player.currency} : '0' + ' ' + ${player.currency}"></span>
+            </p>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/popper.min.js"></script>
+</body>
+</html>

@@ -1,76 +1,72 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="https://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <title>SportsBet</title>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="/css/reset.css">
 <link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/basic.css">
-<link rel="stylesheet" href="/css/home.css">
 <link rel="stylesheet" href="/css/navbar.css">
 <link rel="stylesheet" href="/css/table.css">
 </head>
-<header>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-		<span class="navbar-brand pointer-none">SportsBet</span>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarResponsive"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active pr-4"><a class="nav-link"
-					href="/home">Home</span></a></li>
-				<li class="nav-item pr-4"><a class="nav-link" href="/events">Events</a>
-				</li>
-				<li class="nav-item pr-4 dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">Language</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">English</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Magyar</a></li>
-				<li class="nav-item pr-4"><a
-					class="nav-link active button-decoration" href="/login">Login</a></li>
-			</ul>
-		</div>
-	</nav>
-</header>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark static-top">
+    <span class="navbar-brand">SportsBet</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active pr-4">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+            <li class="nav-item pr-4">
+                <a class="nav-link" href="/events">Events</a>
+            </li>
+            <li class="nav-item pr-4 dropdown">
+                <select class="custom-select" id="language">
+                    <option selected>Language</option>
+                    <option value="en">EN</option>
+                    <option value="hu">HU</option>
+                </select>
+            </li>
+            <li class="nav-item pr-4">
+                <a class="nav-link active button-decoration" href="/login">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <body>
-	<div class="container col-xl-6 col-lg-8 col-md-10">
-		<h1 class="text-dark">Bet on the Best!</h1>
-		<table class="table table-bordered table-striped">
-			<thead class="thead-dark">
-				<tr>
-					<th scope="col">Title</th>
-					<th scope="col">Time</th>
-					<th scope="col">betType</th>
-					<th scope="col">outcome</th>
-					<th scope="col">odd</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:if="${events.empty}">
-					<td colspan="6">No Events Available</td>
-				</tr>
-				<tr th:each="event : ${events}">
-					<td><span th:text="${event.title}">N/A</span></td>
-					<td><span th:text="${event.time}">N/A</span></td>
-					<td><span th:text="${event.betType}">N/A</span></td>
-					<td><span th:text="${event.outcome}">N/A</span></td>
-					<td><span th:text="${event.odd}">N/A</span></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/popper.min.js"></script>
+    <div class="container col-xl-6 col-lg-8 col-md-10">
+        <h1 th:text="#{home.welcome}"></h1>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Home</th>
+                    <th scope="col">Draw</th>
+                    <th scope="col">Away</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${events.empty}">
+                    <td colspan="6">No Events Available</td>
+                </tr>
+                <tr th:each="event : ${events}">
+                    <td><span th:text="${event.title}">N/A</span></td>
+                    <td><span th:text="${event.time}">N/A</span></td>
+                    <td><span th:text="${event.homeTeamWinOdd} ?: 'N/A'">N/A</span></td>
+                    <td><span th:text="${event.drawOdd} ?: 'N/A'">N/A</span></td>
+                    <td><span th:text="${event.awayTeamWinOdd} ?: 'N/A'">N/A</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/login">Sing in to Bet!</a>
+    </div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/languageSelector.js"></script>
 </body>
 </html>

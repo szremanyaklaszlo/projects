@@ -14,8 +14,8 @@ public class FootballSportEvent extends SportEvent {
         super();
     }
 
-    public FootballSportEvent(String title, LocalDateTime startTime, LocalDateTime endTime, List<Bet> bets) {
-        super(title, startTime, endTime, bets);
+    public FootballSportEvent(String title, String homeTeam, String awayTeam, LocalDateTime startTime, LocalDateTime endTime, List<Bet> bets) {
+        super(title, homeTeam, awayTeam, startTime, endTime, bets);
     }
 
 }
